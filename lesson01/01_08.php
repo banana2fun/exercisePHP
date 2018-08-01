@@ -7,7 +7,9 @@ fwrite($output, "Введите целое трёхзначное число: ")
 fscanf($input, "%d", $k);
 
 if (($k > 99 && $k < 1000) || ($k > -1000 && $k < -99)) {
-    $arr = str_split($k);
-    $s = array_sum($arr);
+    $firstNumber = (int)($k / 100);
+    $secondNumber = (int)(($k - $firstNumber * 100) / 10);
+    $thrirdNumber = ($k - $firstNumber * 100 - $secondNumber * 10);
+    $s = $firstNumber + $secondNumber + $thrirdNumber;
     fprintf($output, "Сумма цифр числа " . $k . " равна %d", $s);
 }

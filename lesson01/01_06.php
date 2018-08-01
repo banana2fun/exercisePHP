@@ -7,8 +7,8 @@ fwrite($output, "Задайте целое положительное число
 fscanf($input, "%d", $k);
 
 if ($k > 100) {
-    $h = floor(($k % 1000) / 100) ;
+    $h = ($k % 1000) / 100 ;
     fprintf($output, "Третье число с конца: %d", $h);
 } else {
-    fprintf($output, "Ведите число меньше 100!");
+    fprintf($output, "Ведите число больше 100!");
 }
