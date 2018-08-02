@@ -4,11 +4,11 @@ $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
 fwrite($output, "Введите координтаты первой вершины: ");
-fscanf($input, "%d %d",$x1, $y1);
+fscanf($input, "%f %f",$x1, $y1);
 fwrite($output, "Введите координтаты второй вершины: ");
-fscanf($input, "%d %d", $x2, $y2);
+fscanf($input, "%f %f", $x2, $y2);
 fwrite($output, "Введите координтаты третьей вершины: ");
-fscanf($input, "%d %d", $x3, $y3);
+fscanf($input, "%f %f", $x3, $y3);
 
 $a = sqrt(pow($x2 - $x1, 2) + pow($y2 - $y1, 2));
 $b = sqrt(pow($x3 - $x2, 2) + pow($y3 - $y2, 2));
