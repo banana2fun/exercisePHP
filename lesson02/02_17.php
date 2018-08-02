@@ -11,12 +11,9 @@ function y($x) {
     return $y;
 }
 
-if (y($x1) === $y1) {
+if (y($x1) === $y1)
     fprintf($output, "Точка (%.2f, %.2f) лежит на прямой y=4x-3", $x1, $y1);
-}
-if (y($x1) > $y1) {
+if (y($x1) > $y1)
     fprintf($output, "Точка (%.2f, %.2f) лежит ниже прямой y=4x-3", $x1, $y1);
-}
-if (y($x1) < $y1) {
+if (y($x1) < $y1)
     fprintf($output, "Точка (%.2f, %.2f) лежит выше прямой y=4x-3", $x1, $y1);
-}

@@ -9,7 +9,7 @@ $output = fopen("php://stdout", "w");
 fwrite($output, "Введите текущее время ч м: ");
 fscanf($input, "%d %d", $m, $n);
 
-if ($m > 0 && $m <= 12 && $n >= 0 && $n < 60) {
+if ($m > 0 && $m <= numberOfHour && $n >= 0 && $n < minuteInHour) {
     $timeLeft = (numberOfHour - $m) * minuteInHour - $n;
     fprintf($output, "Осталось %d мин.", $timeLeft);
 } else {
