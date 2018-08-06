@@ -312,3 +312,111 @@ function elementsValueOfOddIndexes(array $arr): array
     }
     return $odd;
 }
+
+function summValueDenominator(array $arr, int $denominator)
+{
+    $summ = 0;
+    foreach ($arr as $value) {
+        if ($value % $denominator === 0) {
+            $summ = $summ + $value;
+        }
+    }
+    return $summ;
+}
+
+function searchOrdinalNumberOfNearestElement(array $arr, $searchNumber): int
+{
+    $length = numberOfElements($arr);
+    indexSwitcher($arr, $length, 2);
+    $number = $arr[0];
+    $OrdinalNumber = 0;
+    foreach ($arr as $key => $value) {
+        if (abs($value - $searchNumber) < $number) {
+            $OrdinalNumber = $key;
+        }
+    }
+    return $OrdinalNumber;
+}
+
+function zeroLongestRow(array $arr): int
+{
+    $length = numberOfElements($arr);
+    indexSwitcher($arr, $length, 0);
+    $count = 0;
+    $zeroArr = [];
+    for ($i = 0; $i < $length; $i++) {
+        if ($arr[$i] === 0) {
+            $count++;
+            $zeroArr[] = $count;
+        } else {
+            $count = 0;
+        }
+    }
+    return valueOfMaxElement($zeroArr);
+}
+
+function countOfMaxElementsValue(array $arr): int
+{
+    $max = valueOfMaxElement($arr);
+    $countMax = 0;
+    foreach ($arr as $value) {
+        if ($value === $max) {
+            $countMax++;
+        }
+    }
+    return $countMax;
+}
+
+function searchRadius(array $arr1, array $arr2)
+{
+    $radius = [];
+    $length = numberOfElements($arr1);
+    if (numberOfElements($arr1) !== numberOfElements($arr2)) {
+        throw new Exception('Массивы разной длины');
+    } else {
+        for ($i = 0; $i < $length; $i++) {
+            $radius[] = sqrt(pow($arr1[$i], 2) + pow($arr2[$i], 2));
+        }
+    }
+    return valueOfMaxElement($radius);
+}
+
+function dispersion(array $arr)
+{
+    $expectedValue = arithmeticMeanOfElements($arr);
+    $summ = 0;
+    foreach ($arr as $value) {
+        $summ += pow(($value - $expectedValue), 2);
+    }
+    $dispersion = sqrt($summ / (numberOfElements($arr) - 1));
+    return $dispersion;
+}
+
+function deleteElements(array $arr, $deleteValue): array
+{
+    $filtred = [];
+    foreach ($arr as $value) {
+        if ($value !== $deleteValue) {
+            $filtred[] =  $value;
+        }
+    }
+    return $filtred;
+}
+
+function frequencyOfOccurrence(array $arr1, array $arr2): array
+{
+    $length1 = numberOfElements($arr1);
+    $length2 = numberOfElements($arr2);
+    $arr3 = [];
+    $count = 0;
+    for ($i = 0; $i < $length2; $i++) {
+        for ($j = 0; $j < $length1; $j++) {
+            if ($arr2[$i] === $arr1[$j]) {
+                $count++;
+            }
+        }
+        $arr3[$count] = $arr2[$i];
+        $count = 0;
+    }
+    return $arr3;
+}

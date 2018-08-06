@@ -7,11 +7,7 @@ fwrite($output, "Введите значения x и y: ");
 fscanf($input, "%f %f", $x, $y);
 
 function z($x, $y) {
-    if ($y < 0) {
-        $z = max($x, $y);
-    } else {
-        $z = min($x, $y);
-    }
+    $z = ($y < 0) ? max($x, $y) : min($x, $y);
     return $z;
 }
 

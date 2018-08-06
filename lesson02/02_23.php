@@ -7,11 +7,7 @@ fwrite($output, "Введите значение x: ");
 fscanf($input, "%f", $x);
 
 function y($x) {
-    if ($x >= 0) {
-        $y = $x * $x;
-    } else {
-        $y = -$x;
-    }
+    $y = ($x >= 0) ? $x * $x : -$x;
     return $y;
 }
 
