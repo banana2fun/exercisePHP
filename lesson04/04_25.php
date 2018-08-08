@@ -1,5 +1,7 @@
 <?php
 
+//Найти три наибольших элемента массива
+
 declare(strict_types=1);
 
 require"inter.php";

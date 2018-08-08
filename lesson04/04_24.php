@@ -1,5 +1,7 @@
 <?php
 
+//Вычислить математическое ожидание М и дисперсию D
+
 declare(strict_types=1);
 
 require"inter.php";

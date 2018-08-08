@@ -1,5 +1,7 @@
 <?php
 
+//Поменять местами минимальный и максимальный элементы массива
+
 declare(strict_types=1);
 
 require"inter.php";

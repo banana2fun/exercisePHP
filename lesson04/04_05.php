@@ -1,5 +1,7 @@
 <?php
 
+//Сформировать одномерный массив В так, что b[1]=a[1], b[2]=a[1]+a[2], … 
+
 declare(strict_types=1);
 
 require"inter.php";
