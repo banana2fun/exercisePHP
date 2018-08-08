@@ -1,5 +1,7 @@
 <?php
 
+//Сформировать одномерный массив X[N] из сумм положительных элементов строк матрицы
+
 declare(strict_types=1);
 
 require "functionFile.php";

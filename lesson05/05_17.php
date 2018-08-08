@@ -1,5 +1,7 @@
 <?php
 
+//Дана матpица A[N,М]. Определить количество элементов матрицы, являющихся простыми числами
+
 declare(strict_types=1);
 
 require "functionFile.php";

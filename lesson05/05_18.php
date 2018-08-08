@@ -1,5 +1,7 @@
 <?php
 
+//Дана матpица A[N,М]. Упорядочить элементы каждой строки в порядке неубывания
+
 declare(strict_types=1);
 
 require "functionFile.php";

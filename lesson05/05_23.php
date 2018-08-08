@@ -1,5 +1,7 @@
 <?php
 
+//Дана матpица A[N,N]. Транспонировать матрицу
+
 declare(strict_types=1);
 
 require "functionFile.php";

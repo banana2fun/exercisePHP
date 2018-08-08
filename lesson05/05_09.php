@@ -1,5 +1,7 @@
 <?php
 
+//В квадратной матрице A[N][N] заменить элементы главной и побочной диагоналей числом 100
+
 declare(strict_types=1);
 
 require "functionFile.php";

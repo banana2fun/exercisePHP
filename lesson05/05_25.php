@@ -1,5 +1,7 @@
 <?php
 
+//Дана матpица A[N,N]. Заменить строку, имеющую наименьшую сумму, на число100
+
 declare(strict_types=1);
 
 require "functionFile.php";

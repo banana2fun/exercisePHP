@@ -1,5 +1,7 @@
 <?php
 
+//Дана матpица A[N,М]. Заменить элементы матрицы, являющиеся простыми числами, нулем
+
 declare(strict_types=1);
 
 require "functionFile.php";
