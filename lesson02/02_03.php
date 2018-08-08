@@ -8,7 +8,8 @@ $output = fopen("php://stdout", "w");
 fwrite($output, "Введите x: ");
 fscanf($input, "%f", $x);
 
-function f($x) {
+function f($x)
+{
     if (sqrt($x / cos(A * $x)) >= 0) {
         $z = exp((A / $x)) + sqrt($x / cos(A * $x));
         return $z;

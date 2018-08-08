@@ -6,7 +6,8 @@ $output = fopen("php://stdout", "w");
 fwrite($output, "Введите значения x и y: ");
 fscanf($input, "%f %f", $x, $y);
 
-function z($x, $y) {
+function z($x, $y)
+{
     $z = ($y < 0) ? max($x, $y) : min($x, $y);
     return $z;
 }

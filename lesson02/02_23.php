@@ -6,7 +6,8 @@ $output = fopen("php://stdout", "w");
 fwrite($output, "Введите значение x: ");
 fscanf($input, "%f", $x);
 
-function y($x) {
+function y($x)
+{
     $y = ($x >= 0) ? $x * $x : -$x;
     return $y;
 }

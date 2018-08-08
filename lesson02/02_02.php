@@ -8,7 +8,8 @@ $output = fopen("php://stdout", "w");
 fwrite($output, "Введите x: ");
 fscanf($input, "%f", $x);
 
-function f($x) {
+function f($x)
+{
     if (sqrt(A * $x) >= 0 && sqrt(cos($x * $x) / ($x * $x)) >= 0) {
         throw new Exception("Выражение под корнем меньше 0");
     }
