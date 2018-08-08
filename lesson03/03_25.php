@@ -1,5 +1,7 @@
 <?php
 
+// Дано натуральное число n. Вычислить сумму n первых слагаемых
+
 $input = fopen ("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
