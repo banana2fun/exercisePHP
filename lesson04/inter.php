@@ -87,7 +87,11 @@ function positiveElements(array $arr): array
 
 function arithmeticMeanOfElements(array $arr)
 {
-    return summOfElements($arr) / numberOfElements($arr);
+    if (numberOfElements($arr)) {
+        throw new Exception("Массив пустой");
+    } else {
+        return sumOfElements($arr) / numberOfElements($arr);
+    }
 }
 
 function changeElementsValue(array $arr, $oldElement, $newElement): array
@@ -126,13 +130,13 @@ function indexesOfMinElement(array $arr): array
     return $indexes;
 }
 
-function summOfElements(array $arr)
+function sumOfElements(array $arr)
 {
-    $summ = 0;
+    $sum = 0;
     foreach ($arr as $value) {
-        $summ += $value;
+        $sum += $value;
     }
-    return $summ;
+    return $sum;
 }
 
 function indexesOfPositiveElement(array $arr): array
@@ -149,10 +153,10 @@ function indexesOfPositiveElement(array $arr): array
 function sequentialAddition(array $arr): array
 {
     $addition = [];
-    $summ = 0;
+    $sum = 0;
     foreach ($arr as $value) {
-        $summ += $value;
-        $addition[] = $summ;
+        $sum += $value;
+        $addition[] = $sum;
     }
     return $addition;
 }
@@ -164,59 +168,57 @@ function swap(& $firstElement, & $secondElement): void
     $firstElement = $temp;
 }
 
-//Подправить
-function uniqleElementsValue(array $arr): array
+function uniqueElementsValue(array $arr): array
 {
-    $uniqleValue = [];
+    $uniqueValue = [];
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr); $j++) {
-            if ($uniqleValue[$j] === $arr[$i]) {
-                unset($uniqleValue[$j]);
+            if ($uniqueValue[$j] === $arr[$i]) {
+                unset($uniqueValue[$j]);
             }
-            $uniqleValue[$i] = $arr[$i];
+            $uniqueValue[$i] = $arr[$i];
         }
     }
-    return $uniqleValue;
+    return $uniqueValue;
 }
 
 function reverseElementsValue(array $arr): array
 {
-    $reverse = [];
-    for ($i = 0; $i < numberOfElements($arr); $i++) {
-        $reverse[] = $arr[numberOfElements($arr) - $i - 1];
+    for ($i = 0; $i < numberOfElements($arr) / 2; $i++) {
+        swap($arr[$i], $arr[numberOfElements($arr) - $i - 1]);
     }
-    return $reverse;
+    return $arr;
 }
 
 function valuesMoreThat(array $arr, $filter): array
 {
-    $filtred = [];
+    $filtered = [];
     foreach ($arr as $value) {
         if ($value > $filter) {
-            $filtred[] = $value;
+            $filtered[] = $value;
         }
     }
-    return $filtred;
+    return $filtered;
 }
 
-function differenseOfArrays(array $firstArr, array $secondArr): array
+function differenceOfArrays(array $firstArr, array $secondArr): array
 {
     $firstLength = numberOfElements($firstArr);
     $secondLength = numberOfElements($secondArr);
     for ($i = 0; $i < $secondLength; $i++) {
         for ($j = 0; $j < $firstLength; $j++) {
-            if ($firstArr[$firstLength - $j - 1] === $secondArr[$i]) {
-                unset($firstArr[$firstLength - $j - 1]);
+            if ($firstArr[$firstLength - $j - 2] === $secondArr[$i]) {
+                unset($firstArr[$firstLength - $j - 2]);
             }
         }
     }
-    return indexSwitcher($firstArr, $firstLength, 0);
+    return indexSwitcher($firstArr, 0);
 }
 
-function indexSwitcher(array $arr, $arrayLength, $firstIndex): array
+function indexSwitcher(array $arr, $firstIndex): array
 {
     $newArray = [];
-    for ($k = 0; $k < $arrayLength; $k++) {
+    for ($k = 0; $k < numberOfElements($arr); $k++) {
         if ($arr[$k] || $arr[$k] === 0) {
             $newArray[$firstIndex] = $arr[$k];
             $firstIndex++;
@@ -225,17 +227,17 @@ function indexSwitcher(array $arr, $arrayLength, $firstIndex): array
     return $newArray;
 }
 
-function mergingArrays(array $firstArr, array $secondArr): array
+function contactArrays(array $firstArr, array $secondArr): array
 {
-    $firstLength = numberOfElements($firstArr);
-    $secondLength = numberOfElements($secondArr);
-    for ($i = 0; $i < $secondLength; $i++) {
-        $firstArr[$firstLength + $i + 1] = $secondArr[$i];
+    $number = numberOfElements($firstArr);
+    foreach ($secondArr as $value) {
+        $firstArr[$number] = $value;
+        $number++;
     }
     return $firstArr;
 }
 
-function positiveElementsBeforeNegativ(array $arr): array
+function positiveElementsBeforeNegative(array $arr): array
 {
     $positiveElements = [];
     foreach ($arr as $value) {
@@ -247,7 +249,7 @@ function positiveElementsBeforeNegativ(array $arr): array
     return $positiveElements;
 }
 
-function swapZeroElementsBeforeNegativToOne(array $arr): array
+function swapZeroElementsBeforeNegativeToOne(array $arr): array
 {
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         if ($arr[$i] < 0) {
@@ -262,13 +264,13 @@ function swapZeroElementsBeforeNegativToOne(array $arr): array
 
 function negativeElements(array $arr): array
 {
-    $negatie = [];
+    $negative = [];
     foreach ($arr as $value) {
         if ($value < 0) {
-            $negatie[] = $value;
+            $negative[] = $value;
         }
     }
-    return $negatie;
+    return $negative;
 }
 
 function zeroElements(array $arr): array
@@ -313,21 +315,20 @@ function elementsValueOfOddIndexes(array $arr): array
     return $odd;
 }
 
-function summValueDenominator(array $arr, int $denominator)
+function sumValueDenominator(array $arr, int $denominator)
 {
-    $summ = 0;
+    $sum = 0;
     foreach ($arr as $value) {
         if ($value % $denominator === 0) {
-            $summ = $summ + $value;
+            $sum = $sum + $value;
         }
     }
-    return $summ;
+    return $sum;
 }
 
 function searchOrdinalNumberOfNearestElement(array $arr, $searchNumber): int
 {
-    $length = numberOfElements($arr);
-    indexSwitcher($arr, $length, 2);
+    indexSwitcher($arr, 2);
     $number = $arr[0];
     $OrdinalNumber = 0;
     foreach ($arr as $key => $value) {
@@ -340,11 +341,10 @@ function searchOrdinalNumberOfNearestElement(array $arr, $searchNumber): int
 
 function zeroLongestRow(array $arr): int
 {
-    $length = numberOfElements($arr);
-    indexSwitcher($arr, $length, 0);
+    indexSwitcher($arr, 0);
     $count = 0;
     $zeroArr = [];
-    for ($i = 0; $i < $length; $i++) {
+    for ($i = 0; $i < numberOfElements($arr); $i++) {
         if ($arr[$i] === 0) {
             $count++;
             $zeroArr[] = $count;
@@ -375,32 +375,32 @@ function searchRadius(array $arr1, array $arr2)
         throw new Exception('Массивы разной длины');
     } else {
         for ($i = 0; $i < $length; $i++) {
-            $radius[] = sqrt(pow($arr1[$i], 2) + pow($arr2[$i], 2));
+            $radius[] = pow($arr1[$i], 2) + pow($arr2[$i], 2);
         }
     }
-    return valueOfMaxElement($radius);
+    return sqrt(valueOfMaxElement($radius));
 }
 
 function dispersion(array $arr)
 {
     $expectedValue = arithmeticMeanOfElements($arr);
-    $summ = 0;
+    $sum = 0;
     foreach ($arr as $value) {
-        $summ += pow(($value - $expectedValue), 2);
+        $sum += pow(($value - $expectedValue), 2);
     }
-    $dispersion = sqrt($summ / (numberOfElements($arr) - 1));
+    $dispersion = sqrt($sum / (numberOfElements($arr) - 1));
     return $dispersion;
 }
 
 function deleteElements(array $arr, $deleteValue): array
 {
-    $filtred = [];
+    $filtered = [];
     foreach ($arr as $value) {
         if ($value !== $deleteValue) {
-            $filtred[] =  $value;
+            $filtered[] = $value;
         }
     }
-    return $filtred;
+    return $filtered;
 }
 
 function frequencyOfOccurrence(array $arr1, array $arr2): array
@@ -419,4 +419,22 @@ function frequencyOfOccurrence(array $arr1, array $arr2): array
         $count = 0;
     }
     return $arr3;
+}
+
+function getMaxElementIndex(array $arr, int $numberOfMaxElements): array
+{
+    $indexOfMax = [];
+    for ($i = 0; $i < $numberOfMaxElements; $i++) {
+        foreach ($arr as $key => $value) {
+            $indexOfMaxValue = indexesOfMaxElement($arr);
+            foreach ($indexOfMaxValue as $item) {
+                if ($item === $key) {
+                    $indexOfMax[] = $key;
+                    $arr[$key] = valueOfMinElement($arr) - 1;
+                    break 2;
+                }
+            }
+        }
+    }
+    return $indexOfMax;
 }

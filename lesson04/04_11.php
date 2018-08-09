@@ -10,8 +10,8 @@ $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
 $arr = createAndInputArray($output, $input, 'int');
-$filtredArr = valuesMoreThat($arr, 100);
-$remainingArr = differenseOfArrays($arr, $filtredArr);
-var_dump($filtredArr);
-var_dump($remainingArr);
-outputArray($output, mergingArrays($filtredArr, $remainingArr));
+
+$filteredArr = valuesMoreThat($arr, 100);
+$remainingArr = differenceOfArrays($arr, $filteredArr);
+
+outputArray($output, contactArrays($filteredArr, $remainingArr));

@@ -10,6 +10,8 @@ $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
 $arr = createAndInputArray($output, $input, 'int');
+
 $minElementIndex = indexesOfMinElement($arr)[0];
 swap($arr[$minElementIndex], $arr[0]);
+
 outputArray($output, $arr);

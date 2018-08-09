@@ -10,6 +10,8 @@ $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
 $arr = createAndInputArray($output, $input, 'int');
-$positiveElements = positiveElementsBeforeNegativ($arr);
+
+$positiveElements = positiveElementsBeforeNegative($arr);
 $numberOfElements = numberOfElements($positiveElements);
+
 fprintf($output, "Количество положительных элементов перед первым отрицательным равно %d: ", $numberOfElements);

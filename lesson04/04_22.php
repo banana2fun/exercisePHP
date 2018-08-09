@@ -10,5 +10,7 @@ $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
 $arr = createAndInputArray($output, $input, 'int');
+
 $countMax = countOfMaxElementsValue($arr);
+
 fprintf($output, "Количество элементов массива с максимальным значением равно %d", $countMax);

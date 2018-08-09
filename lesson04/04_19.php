@@ -12,5 +12,7 @@ $output = fopen("php://stdout", "w");
 $arr = createAndInputArray($output, $input, 'int');
 fwrite($output, "Введите делитель: ");
 fscanf($input, "%d", $x);
-$denominator = summValueDenominator($arr, $x);
+
+$denominator = sumValueDenominator($arr, $x);
+
 outputArray($output, changeElementsValue($arr, 0, $denominator));

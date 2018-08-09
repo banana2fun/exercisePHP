@@ -10,4 +10,8 @@ $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
 $arr = createAndInputArray($output, $input, 'int');
-outputArray($output, changeElementsValue($arr, valueOfMinElement($arr), summOfElements(positiveElements($arr))));
+
+$minValue = valueOfMinElement($arr);
+$sumOfPositive = sumOfElements(positiveElements($arr));
+
+outputArray($output, changeElementsValue($arr, $minValue, $sumOfPositive));
