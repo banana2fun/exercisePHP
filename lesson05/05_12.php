@@ -11,7 +11,7 @@ $output = fopen("php://stdout", "w");
 
 $arr = createAndInputMatrix($output, $input, 'int', 'square');
 
-$sumColumn = sumOfElementsCollumn($arr);
+$sumColumn = sumOfElementsColumn($arr);
 $maxColumn = indexesOfMaxElement($sumColumn);
 
 fprintf($output, "Столбец с максимальной суммой элементов - %d", $maxColumn[0]);

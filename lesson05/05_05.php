@@ -12,6 +12,6 @@ $output = fopen("php://stdout", "w");
 $arr = createAndInputMatrix($output, $input, 'int', 'square');
 
 $elements = positiveElements(elementsValueDownCollateralDiagonal($arr));
-$numberOfElemens = numberOfElements($elements);
+$numberOfElements = numberOfElements($elements);
 
-fprintf($output, "Количество положительных элементов, лежащих ниже побочной диагонали - %.2f", $numberOfElemens);
+fprintf($output, "Количество положительных элементов, лежащих ниже побочной диагонали - %.2f", $numberOfElements);

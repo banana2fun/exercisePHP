@@ -11,4 +11,4 @@ $output = fopen("php://stdout", "w");
 
 $arr = createAndInputMatrix($output, $input, 'int', 'square');
 
-outputMatrix($output, swapCollumn($arr));
+outputMatrix($output, swapColumn($arr));

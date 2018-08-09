@@ -11,8 +11,8 @@ $output = fopen("php://stdout", "w");
 
 $arr = createAndInputMatrix($output, $input, 'int', 'square');
 
-$Main = elementsValueMainDiagonal($arr);
-$Collateral = elementsValueCollateralDiagonal($arr);
-$arr2 = mergingArraysThroughOneElement($Main, $Collateral, numberOfElements($arr));
+$main = elementsValueMainDiagonal($arr);
+$collateral = elementsValueCollateralDiagonal($arr);
+$arr2 = connectArraysThroughOneElement($main, $collateral, numberOfElements($arr));
 
 outputArray($output, $arr2);

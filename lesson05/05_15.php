@@ -11,11 +11,11 @@ $output = fopen("php://stdout", "w");
 
 $arr = createAndInputMatrix($output, $input, 'int', 'rectangle');
 
-$sumCollumn = sumOfElementsCollumn($arr);
+$sumColumn = sumOfElementsColumn($arr);
 $count = 0;
 for ($i = 0; $i < numberOfElements($arr); $i++) {
     for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
-    if ($arr[$i][$j] > $sumCollumn[$j] - $arr[$i][$j] ) {
+    if ($arr[$i][$j] > $sumColumn[$j] - $arr[$i][$j] ) {
         $count++;
     }
     }

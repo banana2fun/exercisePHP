@@ -84,7 +84,7 @@ function checkingMatrixForm(array $arr): void
     }
 }
 
-function swapCollumn(array $arr): array
+function swapColumn(array $arr): array
 {
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]) / 2; $j++) {
@@ -277,29 +277,29 @@ function elementsValueCollateralDiagonal(array $arr): array
     return $collateralValue;
 }
 
-function mergingArraysThroughOneElement(array $firstArr, array $secondArr, $amountOfElements): array
+function connectArraysThroughOneElement(array $firstArr, array $secondArr, $amountOfElements): array
 {
-    $mergArray = [];
+    $connectArray = [];
     for ($i = 0; $i <= $amountOfElements - 1; $i += 2) {
         if ($i === 0) {
-            $mergArray[$i] = $secondArr[$i];
-            $mergArray[$i + 1] = $firstArr[$i];
+            $connectArray[$i] = $secondArr[$i];
+            $connectArray[$i + 1] = $firstArr[$i];
         } else {
-            $mergArray[$i] = $secondArr[$i - 1];
-            $mergArray[$i + 1] = $firstArr[$i - 1];
+            $connectArray[$i] = $secondArr[$i - 1];
+            $connectArray[$i + 1] = $firstArr[$i - 1];
         }
     }
-    unset($mergArray[$amountOfElements]);
-    return $mergArray;
+    unset($connectArray[$amountOfElements]);
+    return $connectArray;
 }
 
 function sumOfElements(array $arr)
 {
-    $summ = 0;
+    $sum = 0;
     foreach ($arr as $value) {
-        $summ += $value;
+        $sum += $value;
     }
-    return $summ;
+    return $sum;
 }
 
 function valuesOfMaxElementColumns(array $arr): array
@@ -327,7 +327,7 @@ function mergingArrays(array $firstArr, array $secondArr): array
     return $firstArr;
 }
 
-function sumOfElementsCollumn(array $arr): array
+function sumOfElementsColumn(array $arr): array
 {
     $count = 0;
     $sum = 0;
