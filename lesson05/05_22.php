@@ -9,6 +9,6 @@ require "functionFile.php";
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'rectangle');
+$arr = createAndInputMatrix($output, $input, INT, RECTANGLE);
 
 outputMatrix($output, simpleNumberOnMatrixToZero($arr));

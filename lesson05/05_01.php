@@ -4,11 +4,11 @@
 
 declare(strict_types=1);
 
-require"functionFile.php";
+require "functionFile.php";
 
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'square');
+$arr = createAndInputMatrix($output, $input, INT, SQUARE);
 
-outputMatrix($output, swapColumn($arr));
+outputMatrix($output, verticalFlip($arr));

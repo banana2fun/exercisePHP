@@ -9,6 +9,16 @@ require "functionFile.php";
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'rectangle');
+$arr = createAndInputMatrix($output, $input, INT, RECTANGLE);
+
+function switcherMinMaxValueOnRows(array $arr): array
+{
+    for ($i = 0; $i < numberOfElements($arr); $i++) {
+        $min = indexesOfMinElement($arr[$i]);
+        $max = indexesOfMaxElement($arr[$i]);
+        swap($arr[$i][$min[0]], $arr[$i][$max[0]]);
+    }
+    return $arr;
+}
 
 outputMatrix($output, switcherMinMaxValueOnRows($arr));

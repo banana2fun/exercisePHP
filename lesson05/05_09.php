@@ -11,7 +11,7 @@ define("NUMBER", 100);
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'square');
+$arr = createAndInputMatrix($output, $input, INT, SQUARE);
 
 for ($i = 0; $i < numberOfElements($arr); $i++) {
     for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {

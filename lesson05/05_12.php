@@ -9,9 +9,9 @@ require "functionFile.php";
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'square');
+$arr = createAndInputMatrix($output, $input, INT, SQUARE);
 
-$sumColumn = sumOfElementsColumn($arr);
-$maxColumn = indexesOfMaxElement($sumColumn);
+$columnTotals = sumOfColumnsElements($arr);
+$maxColumn = indexesOfMaxElement($columnTotals);
 
 fprintf($output, "Столбец с максимальной суммой элементов - %d", $maxColumn[0]);

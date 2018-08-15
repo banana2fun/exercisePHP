@@ -9,6 +9,10 @@ function validateArray(array $arr, int $filterFormat): void
     }
 }
 
+define("INT", 'int');
+define("FLOAT", 'float');
+define("SQUARE", 'square');
+define("RECTANGLE", 'rectangle');
 function createAndInputMatrix($fileOutput, $fileInput, string $elementsType, string $matrixForm): array
 {
     $matrix = [];
@@ -20,11 +24,11 @@ function createAndInputMatrix($fileOutput, $fileInput, string $elementsType, str
         $arr = explode(' ', $elementsArray);
         array_filter($arr, "is_int");
         switch ($elementsType) {
-            case 'int':
+            case INT:
                 validateArray($arr, FILTER_VALIDATE_INT);
                 $matrix[$i] = array_map("intval", $arr);
                 break;
-            case 'float':
+            case FLOAT:
                 validateArray($arr, FILTER_VALIDATE_FLOAT);
                 $matrix[$i] = array_map("floatval", $arr);
                 break;
@@ -33,11 +37,11 @@ function createAndInputMatrix($fileOutput, $fileInput, string $elementsType, str
         }
     }
     switch ($matrixForm) {
-        case 'square':
+        case SQUARE:
             checkingMatrixForm($matrix);
             return $matrix;
             break;
-        case 'rectangle':
+        case RECTANGLE:
             return $matrix;
             break;
         default:
@@ -84,7 +88,7 @@ function checkingMatrixForm(array $arr): void
     }
 }
 
-function swapColumn(array $arr): array
+function verticalFlip(array $arr): array
 {
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]) / 2; $j++) {
@@ -149,19 +153,7 @@ function swap(& $firstElement, & $secondElement): void
     $firstElement = $temp;
 }
 
-function switcherMinMaxValueOnRows(array $arr): array
-{
-    for ($i = 0; $i < numberOfElements($arr); $i++) {
-        $min = indexesOfMinElement($arr[$i]);
-        $max = indexesOfMaxElement($arr[$i]);
-        swap($arr[$i][$min[0]], $arr[$i][$max[0]]);
-        unset($min);
-        unset($max);
-    }
-    return $arr;
-}
-
-function maxMatrixElementIndex(array $arr)
+function maxMatrixElementColumnIndex(array $arr)
 {
     $maxValue = $arr[0][0];
     $indexMax = 0;
@@ -251,20 +243,32 @@ function positiveElements(array $arr): array
     return $positive;
 }
 
-function elementsValueMainDiagonal(array $arr): array
+function elementsValuesMainDiagonal(array $arr): array
 {
     $mainValue = [];
     for ($i = 0; $i < numberOfElements($arr); $i++) {
-        for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
-            if ($i === $j) {
-                $mainValue[] = $arr[$i][$j];
-            }
-        }
+        $mainValue[] = $arr[$i][$i];
     }
     return $mainValue;
 }
 
-function elementsValueCollateralDiagonal(array $arr): array
+function indexOfMaxDiagonalElement(array $arr): array
+{
+    $max = $arr[0][0];
+    $indexMax = [];
+    for ($i = 0; $i < numberOfElements($arr); $i++) {
+        for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
+            if (($i === $j || $i + $j === numberOfElements($arr[$i]) - 1) && $arr[$i][$j] > $max) {
+                $max = $arr[$i][$j];
+                $indexMax[0] = $i;
+                $indexMax[1] = $j;
+            }
+        }
+    }
+    return $indexMax;
+}
+
+function elementsValuesCollateralDiagonal(array $arr): array
 {
     $collateralValue = [];
     for ($i = 0; $i < numberOfElements($arr); $i++) {
@@ -280,16 +284,9 @@ function elementsValueCollateralDiagonal(array $arr): array
 function connectArraysThroughOneElement(array $firstArr, array $secondArr, $amountOfElements): array
 {
     $connectArray = [];
-    for ($i = 0; $i <= $amountOfElements - 1; $i += 2) {
-        if ($i === 0) {
-            $connectArray[$i] = $secondArr[$i];
-            $connectArray[$i + 1] = $firstArr[$i];
-        } else {
-            $connectArray[$i] = $secondArr[$i - 1];
-            $connectArray[$i + 1] = $firstArr[$i - 1];
-        }
+    for ($i = 0; $i < $amountOfElements; $i++) {
+        $connectArray[] = $i % 2 ? $firstArr[$i] : $secondArr[$i];
     }
-    unset($connectArray[$amountOfElements]);
     return $connectArray;
 }
 
@@ -327,18 +324,15 @@ function mergingArrays(array $firstArr, array $secondArr): array
     return $firstArr;
 }
 
-function sumOfElementsColumn(array $arr): array
+function sumOfColumnsElements(array $arr): array
 {
-    $count = 0;
-    $sum = 0;
     $columnSum = [];
     for ($j = 0; $j < numberOfElements($arr[0]); $j++) {
+        $sum = 0;
         for ($i = 0; $i < numberOfElements($arr); $i++) {
             $sum += $arr[$i][$j];
         }
-        $columnSum[$count] = $sum;
-        $count++;
-        $sum = 0;
+        $columnSum[$j] = $sum;
     }
     return $columnSum;
 }
@@ -356,16 +350,16 @@ function halfSumDiagonal(array $main, array $collateral): array
     return $halfSum;
 }
 
-function matrixCheckForSymmetry(array $arr)
+function matrixCheckForSymmetry(array $arr): bool
 {
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
             if ($arr[$i][$j] !== $arr[$j][$i]) {
-                throw new Exception('матрица не симметрична');
+                return false;
             }
         }
     }
-    return "Матрица симметрична";
+    return true;
 }
 
 function sumOfElementsRow(array $arr): array
@@ -389,21 +383,28 @@ function maxMatrixElementValue(array $arr)
     return $maxValue;
 }
 
+function simpleNumberCheck(int $element): bool
+{
+    $a = 2;
+    do {
+        if (($element % $a === 0 && $element !== $a) || $element === 1) {
+            return false;
+        }
+        $a++;
+    } while ($a <= $element);
+    return true;
+}
+
 function simpleNumberOnMatrix(array $arr)
 {
-    $numberOfComposite = 0;
+    $numberOfSimple = 0;
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
-            for ($a = 2; $a < maxMatrixElementValue($arr); $a++) {
-                $current = $arr[$i][$j];
-                if (($current % $a === 0 && $current !== $a) || $current === 1) {
-                    $numberOfComposite++;
-                    break;
-                }
+            if (simpleNumberCheck($arr[$i][$j])) {
+                $numberOfSimple++;
             }
         }
     }
-    $numberOfSimple = numberOfElements($arr) * numberOfElements($arr[0]) - $numberOfComposite;
     return $numberOfSimple;
 }
 
@@ -441,7 +442,7 @@ function sortRowByColumnNondecreasing(array $arr): array
     return $arr;
 }
 
-function zeroInRow(array $arr): array
+function rowLargestNumberZeros(array $arr): array
 {
     $zeroRows = [];
     for ($i = 0; $i < numberOfElements($arr); $i++) {
@@ -456,17 +457,12 @@ function zeroInRow(array $arr): array
     return $zeroRows;
 }
 
-function simpleNumberOnMatrixToZero(array $arr): array
+function simpleNumberOnMatrixToZero(array $arr)
 {
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
-            for ($a = 2; $a < maxMatrixElementValue($arr); $a++) {
-                $current = $arr[$i][$j];
-                if (($current % $a === 0 && $current !== $a) || $current === 1) {
-                    break;
-                } elseif ($current > 0) {
-                    $arr[$i][$j] = 0;
-                }
+            if (simpleNumberCheck($arr[$i][$j])) {
+                $arr[$i][$j] = 0;
             }
         }
     }
@@ -476,16 +472,42 @@ function simpleNumberOnMatrixToZero(array $arr): array
 function transpose(array $arr): array
 {
     $count = 0;
-    $transposeMatrix = [];
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
             if ($j + $count >= numberOfElements($arr[$i])) {
                 break;
             }
-            $arr2[$i][$j + $count] = $arr[$j + $count][$i];
-            $arr2[$j + $count][$i] = $arr[$i][$j + $count];
+            swap($arr[$j + $count][$i], $arr[$i][$j + $count]);
         }
         $count = 1;
     }
-    return $transposeMatrix;
+    return $arr;
+}
+
+function positionRelativeToTheMainDiagonal(array $arr, $element): bool
+{
+    for ($i = 0; $i < numberOfElements($arr); $i++) {
+        for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
+            if ($i > $j && $element === $arr[$i][$j]) {
+                return true;
+            }
+            if ($i < $j && $element === $arr[$i][$j]) {
+                return false;
+            }
+        }
+    }
+}
+
+function positionRelativeToTheCollateralDiagonal(array $arr, $element): bool
+{
+    for ($i = 0; $i < numberOfElements($arr); $i++) {
+        for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
+            if ($i + $j < numberOfElements($arr[$i]) - 1 && $element === $arr[$i][$j]) {
+                return true;
+            }
+            if ($i + $j >= numberOfElements($arr[$i]) && $element === $arr[$i][$j]) {
+                return false;
+            }
+        }
+    }
 }

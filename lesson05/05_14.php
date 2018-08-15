@@ -9,6 +9,10 @@ require "functionFile.php";
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'square');
+$arr = createAndInputMatrix($output, $input, INT, SQUARE);
 
-fprintf($output, "%s", matrixCheckForSymmetry($arr));
+if (!(matrixCheckForSymmetry($arr))) {
+    throw new Exception('Матрица не симметрична');
+} else {
+    fprintf($output, "Матрица симметрична");
+}

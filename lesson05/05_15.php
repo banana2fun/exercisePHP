@@ -9,15 +9,15 @@ require "functionFile.php";
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'rectangle');
+$arr = createAndInputMatrix($output, $input, INT, RECTANGLE);
 
-$sumColumn = sumOfElementsColumn($arr);
+$sumColumn = sumOfColumnsElements($arr);
 $count = 0;
 for ($i = 0; $i < numberOfElements($arr); $i++) {
     for ($j = 0; $j < numberOfElements($arr[$i]); $j++) {
-    if ($arr[$i][$j] > $sumColumn[$j] - $arr[$i][$j] ) {
-        $count++;
-    }
+        if ($arr[$i][$j] > $sumColumn[$j] - $arr[$i][$j]) {
+            $count++;
+        }
     }
 }
 

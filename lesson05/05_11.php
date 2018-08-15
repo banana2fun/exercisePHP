@@ -9,10 +9,9 @@ require "functionFile.php";
 $input = fopen("php://stdin", "r");
 $output = fopen("php://stdout", "w");
 
-$arr = createAndInputMatrix($output, $input, 'int', 'square');
+$arr = createAndInputMatrix($output, $input, INT, SQUARE);
 
-$main = elementsValueMainDiagonal($arr);
-$collateral = elementsValueCollateralDiagonal($arr);
-$arr[0][0] = valueOfMaxElement(mergingArrays($main, $collateral));
+$indexOfMaxDiagonalElement = indexOfMaxDiagonalElement($arr);
+swap($arr[0][0], $arr[$indexOfMaxDiagonalElement[0]][$indexOfMaxDiagonalElement[1]]);
 
 outputMatrix($output, $arr);
