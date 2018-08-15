@@ -57,7 +57,7 @@ function outputMatrix($file, array $arr): void
         foreach ($ele as $el) {
             fprintf($file, "%.2f ", $el);
         }
-        echo "\r\n";
+        fprintf($file, "\r\n");
     }
 }
 
@@ -92,9 +92,7 @@ function verticalFlip(array $arr): array
 {
     for ($i = 0; $i < numberOfElements($arr); $i++) {
         for ($j = 0; $j < numberOfElements($arr[$i]) / 2; $j++) {
-            $temp = $arr[$i][$j];
-            $arr[$i][$j] = $arr[$i][numberOfElements($arr[$i]) - $j - 1];
-            $arr[$i][numberOfElements($arr[$i]) - $j - 1] = $temp;
+            swap($arr[$i][$j], $arr[$i][numberOfElements($arr[$i]) - $j - 1]);
         }
     }
     return $arr;
@@ -170,14 +168,15 @@ function maxMatrixElementColumnIndex(array $arr)
 function minMatrixElementIndexRow(array $arr)
 {
     $minValue = $arr[0][0];
+    $minElementIndex = 0;
     for ($i = 0; $i < numberOfElements($arr); $i++) {
-        $indexOfMinValue = indexesOfMinElement($arr[$i]);
-        if ($arr[$i][$indexOfMinValue[0]] < $minValue) {
-            $minValue = $arr[$i][$indexOfMinValue[0]];
-            $minElement = $i;
+        $minInRow = valueOfMinElement($arr[$i]);
+        if ($minInRow < $minValue) {
+            $minValue = $minInRow;
+            $minElementIndex = $i;
         }
     }
-    return $minElement;
+    return $minElementIndex;
 }
 
 function elementsValueDownMainDiagonal(array $arr): array
@@ -245,11 +244,11 @@ function positiveElements(array $arr): array
 
 function elementsValuesMainDiagonal(array $arr): array
 {
-    $mainValue = [];
+    $mainValues = [];
     for ($i = 0; $i < numberOfElements($arr); $i++) {
-        $mainValue[] = $arr[$i][$i];
+        $mainValues[] = $arr[$i][$i];
     }
-    return $mainValue;
+    return $mainValues;
 }
 
 function indexOfMaxDiagonalElement(array $arr): array
@@ -301,17 +300,22 @@ function sumOfElements(array $arr)
 
 function valuesOfMaxElementColumns(array $arr): array
 {
-    $max = $arr[0][0];
     $maxCol = [];
     for ($j = 0; $j < numberOfElements($arr[0]); $j++) {
-        for ($i = 0; $i < numberOfElements($arr); $i++) {
-            if ($arr[$i][$j] > $max) {
-                $max = $arr[$i][$j];
-            }
-        }
-        $maxCol[] = $max;
+        $maxCol[] = valueOfMaxElementColumn($arr, $j);
     }
     return $maxCol;
+}
+
+function valueOfMaxElementColumn(array $arr, int $columnNumber)
+{
+    $max = $arr[0][$columnNumber];
+    for ($i = 1; $i < numberOfElements($arr); $i++) {
+        if ($arr[$i][$columnNumber] > $max) {
+            $max = $arr[$i][$columnNumber];
+        }
+    }
+    return $max;
 }
 
 function mergingArrays(array $firstArr, array $secondArr): array
@@ -341,11 +345,7 @@ function halfSumDiagonal(array $main, array $collateral): array
 {
     $halfSum = [];
     for ($i = 0; $i < numberOfElements($main); $i++) {
-        if ($i === numberOfElements($main) - $i - 1) {
-            $halfSum[$i] = $main[$i] / 2;
-        } else {
-            $halfSum[$i] = ($main[$i] + $collateral[$i]) / 2;
-        }
+        $halfSum[] = ($main[$i] + $collateral[$i]) / 2;
     }
     return $halfSum;
 }

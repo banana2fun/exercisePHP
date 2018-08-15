@@ -14,7 +14,6 @@ $output = fopen("php://stdout", "w");
 $arr = createAndInputMatrix($output, $input, INT, SQUARE);
 
 $indexMax = maxMatrixElementColumnIndex($arr);
-var_dump($indexMax);
 for ($i = 0; $i < numberOfElements($arr); $i++) {
     $arr[$i][$indexMax] = NUMBER;
 }
